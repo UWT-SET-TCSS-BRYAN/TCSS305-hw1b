@@ -1,3 +1,5 @@
+package edu.uw.tcss.model;
+
 import edu.uw.tcss.model.Item;
 import edu.uw.tcss.model.StoreItem;
 import org.junit.jupiter.api.Test;
