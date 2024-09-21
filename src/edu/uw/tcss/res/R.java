@@ -135,6 +135,9 @@ public final class R {
         
         /** The width of the total text field in the BookStore GUI. */
         public static final int BF_TEXTFIELD_TOTAL = 12;
+
+        /** The width of the item count text field in the BookStore GUI. */
+        public static final int BF_TEXTFIELD_ITEM_COUNT = 8;
         
         /** The width of the quantity text field in the BookStore GUI. */
         public static final int BF_TEXTFIELD_QUANITITY = 3;
@@ -211,12 +214,18 @@ public final class R {
         
         /** Text in Total text field. */
         public static final String BF_TEXTFIELD_TOTAL = "$0.00";
+
+        /** Text in Total text field. */
+        public static final String BF_TEXTFIELD_ITEMS_IN_CART = "0/0";
         
         /** Text in Total text field. */
         public static final String BF_FRAME_TITLE = "UW Bookstore";
         
         /** Message on total Label. */
         public static final String BF_LABEL_TOTAL = "order total:";
+
+        /** Message on total Label. */
+        public static final String BF_LABEL_ITEM_IN_CART = "items/item orders:";
         
         /** Message on clear Button. */
         public static final String BF_BUTTON_CLEAR = "Clear";

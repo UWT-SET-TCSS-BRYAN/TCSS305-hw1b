@@ -6,6 +6,7 @@ package edu.uw.tcss.view;
 
 
 
+import edu.uw.tcss.model.Cart;
 import edu.uw.tcss.model.Item;
 import edu.uw.tcss.model.StoreCart;
 import edu.uw.tcss.model.StoreItemOrder;
@@ -75,6 +76,11 @@ public final class BookstoreFrame extends JFrame {
      * The text field used to display the total amount owed by the customer.
      */
     private final JTextField myTotal;
+
+    /**
+     * The text field used to display the total amount owed by the customer.
+     */
+    private final JTextField myItemsInCart;
     
     /**
      * The panel that holds the item descriptions. Needed to add and remove on
@@ -103,6 +109,10 @@ public final class BookstoreFrame extends JFrame {
         // set up text field with order total
         myTotal = new JTextField(R.Strings.BF_TEXTFIELD_TOTAL,
                                  R.Dimensions.BF_TEXTFIELD_TOTAL);
+
+        // set up text field with order total
+        myItemsInCart = new JTextField(R.Strings.BF_TEXTFIELD_ITEMS_IN_CART,
+                R.Dimensions.BF_TEXTFIELD_ITEM_COUNT);
         
         myQuantities = new LinkedList<>();
         
@@ -203,6 +213,10 @@ public final class BookstoreFrame extends JFrame {
         myTotal.setEnabled(false);
         myTotal.setDisabledTextColor(R.Colors.CONTENT_TEXT);
 
+        myItemsInCart.setEditable(false);
+        myItemsInCart.setEnabled(false);
+        myItemsInCart.setDisabledTextColor(R.Colors.CONTENT_TEXT);
+
         // create the panel, and its label
 
         final JPanel totalPanel = new JPanel();
@@ -211,10 +225,18 @@ public final class BookstoreFrame extends JFrame {
         l.setForeground(R.Colors.HEADER_FOOTER_TEXT);
         totalPanel.add(l);
         totalPanel.add(myTotal);
+
+        final JPanel itemsCountPanel = new JPanel();
+        itemsCountPanel.setBackground(R.Colors.HEADER_FOOTER_BG);
+        final JLabel label = new JLabel(R.Strings.BF_LABEL_ITEM_IN_CART);
+        label.setForeground(R.Colors.HEADER_FOOTER_TEXT);
+        itemsCountPanel.add(label);
+        itemsCountPanel.add(myItemsInCart);
         
         final JPanel p = new JPanel(new BorderLayout());
         p.add(makeCampusPanel(), BorderLayout.NORTH);
         p.add(totalPanel, BorderLayout.CENTER);
+        p.add(itemsCountPanel, BorderLayout.SOUTH);
         
         return p;
     }
@@ -327,6 +349,8 @@ public final class BookstoreFrame extends JFrame {
     private void updateTotal() {
         final double total = myItems.calculateTotal().doubleValue();
         myTotal.setText(NumberFormat.getCurrencyInstance().format(total));
+        final Cart.CartSize count = myItems.getCartSize();
+        myItemsInCart.setText(count.itemCount() + "/" + count.itemOrderCount());
     }
 }
 

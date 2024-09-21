@@ -6,43 +6,23 @@ import java.math.BigDecimal;
 
 public class StoreCart implements Cart {
 
+    public StoreCart() { }
 
-    public StoreCart() {
+    public void add(final StoreItemOrder theOrder) { }
 
-    }
-    
-    @Override
-    public void add(final StoreItemOrder theOrder) {
+    public void setMembership(final boolean theMembership) { }
 
-    }
-
-    
-    @Override
-    public void setMembership(final boolean theMembership) {
-
-    }
-
-
-    @Override
     public BigDecimal calculateTotal() {
-        
         return null;
     }
-    
-    
-    @Override
-    public void clear() {
-        
-    }
-    
-    
-    @Override
-    public int getCartSize() {
-        return -1;
+
+    public void clear() { }
+
+    public CartSize getCartSize() {
+        return new CartSize(10, 20);
     }
 
 
-    @Override
     public String toString() {
         return null;
     }
