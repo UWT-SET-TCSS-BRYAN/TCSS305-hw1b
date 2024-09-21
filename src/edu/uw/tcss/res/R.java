@@ -159,9 +159,6 @@ public final class R {
         /** The filename of the file containing the items to display in the cart. */
         public static final String IO_CONFIG_FILE = "config.txt";
         
-        /** The filename of the file containing the user credentials. */
-        public static final String IO_CREDENTIALS_FILE = "users.txt";
-        
         /** The filename of the application icon. */
         public static final String IO_ICON_FILE = "w.gif";
         
