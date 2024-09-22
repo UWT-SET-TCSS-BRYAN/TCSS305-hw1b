@@ -8,7 +8,7 @@ public class StoreCart implements Cart {
 
     public StoreCart() { }
 
-    public void add(final StoreItemOrder theOrder) { }
+    public void add(final ItemOrder theOrder) { }
 
     public void setMembership(final boolean theMembership) { }
 

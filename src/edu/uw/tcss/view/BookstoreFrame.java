@@ -140,7 +140,7 @@ public final class BookstoreFrame extends JFrame {
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        add(makeTotalPanel(), BorderLayout.NORTH);
+        add(makeTotalAndCountPanel(), BorderLayout.NORTH);
         
         myItemsPanel = makeItemsPanel(myCampusInventories.get(myCurrentCampus)); 
         add(myItemsPanel, BorderLayout.CENTER);
@@ -205,6 +205,21 @@ public final class BookstoreFrame extends JFrame {
      * 
      * @return The created panel
      */
+    private JPanel makeTotalAndCountPanel() {
+        
+        final JPanel p = new JPanel(new BorderLayout());
+        p.add(makeCampusPanel(), BorderLayout.NORTH);
+        p.add(makeTotalPanel(), BorderLayout.CENTER);
+        p.add(makeItemCountPanel(), BorderLayout.SOUTH);
+        
+        return p;
+    }
+
+    /**
+     * Creates a panel to hold the total.
+     *
+     * @return The created panel
+     */
     private JPanel makeTotalPanel() {
         // tweak the text field so that users can't edit it, and set
         // its color appropriately
@@ -212,10 +227,6 @@ public final class BookstoreFrame extends JFrame {
         myTotal.setEditable(false);
         myTotal.setEnabled(false);
         myTotal.setDisabledTextColor(R.Colors.CONTENT_TEXT);
-
-        myItemsInCart.setEditable(false);
-        myItemsInCart.setEnabled(false);
-        myItemsInCart.setDisabledTextColor(R.Colors.CONTENT_TEXT);
 
         // create the panel, and its label
 
@@ -226,19 +237,35 @@ public final class BookstoreFrame extends JFrame {
         totalPanel.add(l);
         totalPanel.add(myTotal);
 
+        return totalPanel;
+    }
+
+
+
+    /**
+     * Creates a panel to hold the item count.
+     *
+     * @return The created panel
+     */
+    private JPanel makeItemCountPanel() {
+        // tweak the text field so that users can't edit it, and set
+        // its color appropriately
+
+        myItemsInCart.setEditable(false);
+        myItemsInCart.setEnabled(false);
+        myItemsInCart.setDisabledTextColor(R.Colors.CONTENT_TEXT);
+
+        // create the panel, and its label
+
+
         final JPanel itemsCountPanel = new JPanel();
         itemsCountPanel.setBackground(R.Colors.HEADER_FOOTER_BG);
         final JLabel label = new JLabel(R.Strings.BF_LABEL_ITEM_IN_CART);
         label.setForeground(R.Colors.HEADER_FOOTER_TEXT);
         itemsCountPanel.add(label);
         itemsCountPanel.add(myItemsInCart);
-        
-        final JPanel p = new JPanel(new BorderLayout());
-        p.add(makeCampusPanel(), BorderLayout.NORTH);
-        p.add(totalPanel, BorderLayout.CENTER);
-        p.add(itemsCountPanel, BorderLayout.SOUTH);
-        
-        return p;
+
+        return itemsCountPanel;
     }
 
     /**

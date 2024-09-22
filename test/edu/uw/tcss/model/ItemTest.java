@@ -294,6 +294,20 @@ class ItemTest {
                                     fourArgument,
                                     "4 argument different objects with the same "
                                             + "state should be equals() true");
+                        },
+                        () -> {
+                            final Item fourArgument =
+                                    new StoreItem(
+                                            ITEM_NAME,
+                                            new BigDecimal(ITEM_PRICE),
+                                            0,
+                                            BigDecimal.ZERO);
+                            assertEquals(
+                                    TEST_ITEM,
+                                    fourArgument,
+                                    "4 argument object with  0 bulk items and ZERO bulk "
+                                            + "price and 2 argument object with same name and "
+                                            + "price should be equals() true");
                         }));
     }
 
@@ -336,60 +350,60 @@ class ItemTest {
                         () -> {
                             final Item fourArgument =
                                     new StoreItem(
-                                            ITEM_NAME + "wrong",
+                                            BULK_ITEM_NAME + "wrong",
                                             new BigDecimal(ITEM_PRICE),
                                             BULK_QUANTITY,
                                             new BigDecimal(BULK_PRICE));
                             assertNotEquals(
-                                    TEST_ITEM,
+                                    TEST_BULK_ITEM,
                                     fourArgument,
                                     "4 argument Different name should be false");
                         },
                         () -> {
                             final Item fourArgument =
                                     new StoreItem(
-                                            ITEM_NAME,
+                                            BULK_ITEM_NAME,
                                             new BigDecimal("10" + ITEM_PRICE),
                                             BULK_QUANTITY,
                                             new BigDecimal(BULK_PRICE));
                             assertNotEquals(
-                                    TEST_ITEM,
+                                    TEST_BULK_ITEM,
                                     fourArgument,
                                     "4 argument Different price should be false");
                         },
                         () -> {
                             final Item fourArgument =
                                     new StoreItem(
-                                            ITEM_NAME,
+                                            BULK_ITEM_NAME,
                                             new BigDecimal(ITEM_PRICE),
                                             10 + BULK_QUANTITY,
                                             new BigDecimal(BULK_PRICE));
                             assertNotEquals(
-                                    TEST_ITEM,
+                                    TEST_BULK_ITEM,
                                     fourArgument,
                                     "4 argument Different bulk quantity should be false");
                         },
                         () -> {
                             final Item fourArgument =
                                     new StoreItem(
-                                            ITEM_NAME,
+                                            BULK_ITEM_NAME,
                                             new BigDecimal(ITEM_PRICE),
                                             BULK_QUANTITY,
                                             new BigDecimal("10" + BULK_PRICE));
                             assertNotEquals(
-                                    TEST_ITEM,
+                                    TEST_BULK_ITEM,
                                     fourArgument,
                                     "4 argument Different bulk price should be false");
                         },
                         () -> {
                             final Item fourArgument =
                                     new StoreItem(
-                                            ITEM_NAME + "wrong",
+                                            BULK_ITEM_NAME + "wrong",
                                             new BigDecimal("10" + ITEM_PRICE),
                                             10 + BULK_QUANTITY,
                                             new BigDecimal("10" + BULK_PRICE));
                             assertNotEquals(
-                                    TEST_ITEM,
+                                    TEST_BULK_ITEM,
                                     fourArgument,
                                     "4 argument Different name, price, bulk quantity, "
                                             + "bulk price should be false");
@@ -397,21 +411,46 @@ class ItemTest {
                 ));
     }
 
+    @Test
+    void testNotEqualsEdgeCases() {
+        assertAll("NOT equals tests for edge cases.",
+                () -> assertAll("NOT equals test null arguments.",
+                        () -> assertNotEquals(
+                                TEST_ITEM,
+                                null,
+                                "2 argument null argument should be false"),
+                        () -> assertNotEquals(
+                                TEST_BULK_ITEM,
+                                null,
+                                "4 argument null argument should be false")
+                ),
+                () -> assertAll("NOT equals test different type of arguments.",
+                        () -> assertNotEquals(
+                                TEST_ITEM,
+                                "A String",
+                                "2 argument String Object argument should be false"),
+                        () -> assertNotEquals(
+                                TEST_BULK_ITEM,
+                                "A String",
+                                "2 argument String Object argument should be false"),
+                        () -> assertNotEquals(
+                                TEST_ITEM,
+                                new BigDecimal("9.99"),
+                                "2 argument BigDecimal Object argument should be false"),
+                        () -> assertNotEquals(
+                                TEST_BULK_ITEM,
+                                new BigDecimal("9.99"),
+                                "4 argument BigDecimal Object argument should be false")
+                ));
+    }
 
     @Test
     void testHashCode() {
         assertAll("hashCode test.",
-                () -> {
-                    assertEquals(
-                            TEST_ITEM,
-                            TEST_ITEM,
-                            "2 argument different objects with the same state "
-                                    + "should be equals() true");
-                    assertEquals(
+                () -> assertEquals(
                             TEST_ITEM.hashCode(),
                             TEST_ITEM.hashCode(),
-                            "2 argument objects equal by equals must have the same hashCode");
-                },
+                            "2 argument objects equal by equals must have the same hashCode"),
                 () -> {
                     final Item twoArgument =
                             new StoreItem(ITEM_NAME, new BigDecimal(ITEM_PRICE));
@@ -425,16 +464,10 @@ class ItemTest {
                             twoArgument.hashCode(),
                             "2 argument objects equal by equals must have the same hashCode");
                 },
-                () -> {
-                    assertEquals(
-                            TEST_BULK_ITEM,
-                            TEST_BULK_ITEM,
-                            "4 argument Same object should be equals() true");
-                    assertEquals(
+                () -> assertEquals(
                             TEST_BULK_ITEM.hashCode(),
                             TEST_BULK_ITEM.hashCode(),
-                            "4 argument objects equal by equals must have the same hashCode");
-                },
+                            "4 argument objects equal by equals must have the same hashCode"),
                 () -> {
                     final Item fourArgument =
                             new StoreItem(

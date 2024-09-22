@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public interface Cart {
 
-    void add(StoreItemOrder theOrder);
+    void add(ItemOrder theOrder);
 
     void setMembership(boolean theMembership);
 
