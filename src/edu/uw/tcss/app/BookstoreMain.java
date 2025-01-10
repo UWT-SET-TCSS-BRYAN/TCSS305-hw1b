@@ -27,8 +27,8 @@ import javax.swing.SwingWorker;
  * @author Daniel M. Zimmerman (Formatting and Comments)
  * @author Alan Fowler (Numerous changes including use of BigDecimal and file input)
  * @author Charles Bryan (Added multiple file loading options/changed name)
- * @author Charles Bryan (Added credentialling sytseM0
- * @version January 2020
+ * @author Charles Bryan (Removed credentialling sytsem)
+ * @version January 2025
  */
 
 public final class BookstoreMain {
@@ -115,5 +115,8 @@ public final class BookstoreMain {
             }
         }
     }
+
+
+
 
 } // end class BookstoreMain
